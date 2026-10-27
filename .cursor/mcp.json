@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "learning-weather": {
+      "command": "npx",
+      "args": [
+        "tsx",
+        "${workspaceFolder}/src/index.ts"
+      ]
+    }
+  }
+}
