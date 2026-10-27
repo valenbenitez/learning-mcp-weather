@@ -1,32 +1,13 @@
 import type { McpServer } from '@modelcontextprotocol/server';
 import { z } from 'zod';
+import { fromCaught, textResult } from '../lib/mcpResult.js';
 import {
   geocodeCity,
   getForecast,
   getWeatherByCity,
-  OpenMeteoError,
 } from '../providers/openMeteo.js';
 
-function textResult(data: unknown, isError = false) {
-  return {
-    content: [
-      {
-        type: 'text' as const,
-        text: typeof data === 'string' ? data : JSON.stringify(data, null, 2),
-      },
-    ],
-    isError,
-  };
-}
-
-function fromCaught(err: unknown) {
-  if (err instanceof OpenMeteoError) {
-    return textResult(err.message, true);
-  }
-  const detail = err instanceof Error ? err.message : String(err);
-  return textResult(`Error inesperado: ${detail}`, true);
-}
-
+/** Registra tools de clima que delegan en el provider Open-Meteo. */
 export function registerWeatherTools(server: McpServer): void {
   server.registerTool(
     'geocode_city',

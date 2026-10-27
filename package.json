@@ -1,7 +1,7 @@
 {
   "name": "learning-mcp-weather",
-  "version": "1.0.0",
-  "description": "Learning MCP: Open-Meteo weather wrapper",
+  "version": "0.4.0",
+  "description": "Learning MCP server: Open-Meteo weather tools, resource and prompt over stdio",
   "main": "index.js",
   "scripts": {
     "start": "tsx src/index.ts",
