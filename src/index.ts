@@ -1,12 +1,14 @@
 import { McpServer } from '@modelcontextprotocol/server';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
 import { z } from 'zod';
+import { registerCompareCitiesPrompt } from './prompts/compareCities.js';
+import { registerWeatherCodeResource } from './resources/weatherCodes.js';
 import { registerWeatherTools } from './tools/weather.js';
 
 function createServer(): McpServer {
   const server = new McpServer({
     name: 'learning-weather',
-    version: '0.2.1',
+    version: '0.3.0',
   });
 
   server.registerTool(
@@ -40,9 +42,11 @@ function createServer(): McpServer {
   );
 
   registerWeatherTools(server);
+  registerWeatherCodeResource(server);
+  registerCompareCitiesPrompt(server);
 
   console.error(
-    'learning-weather tools: ping, geocode_city, get_weather (v0.2.1)',
+    'learning-weather v0.3.0 — tools: ping, geocode_city, get_weather | resource: weather://docs/codes | prompt: compare_cities',
   );
 
   return server;
